@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Remembering What Matters: Dependency-Guided Structured Memory for VLA Policies</title>
+  <meta name="description" content="TTS-Memory is a two-tier memory framework for long-horizon vision-language-action policies. The first tier retrieves relevant completed subtasks through a dependency DAG, and the second tier selects representative keyframes within each subtask.">
+  <meta name="keywords" content="TTS-Memory, Vision-Language-Action, Robotic Manipulation, Memory, Subtask, DAG">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    .publication-authors a,
+    .author-block {
+      color: #333;
+    }
+    .author-block sup {
+      font-size: 0.7em;
+    }
+    .affiliation-block,
+    .note-block {
+      font-size: 0.95rem;
+      color: #444;
+    }
+    .link-block .button {
+      transform: scale(0.9);
+      cursor: default;
+    }
+    .link-block .button span {
+      font-size: 20px !important;
+    }
+    .link-block .icon i.fas,
+    .link-block .icon i.fab {
+      font-size: 1.05rem;
+    }
+    .overview-caption {
+      margin-top: 0.8rem;
+      color: #444;
+      font-size: 0.95rem;
+    }
+    .video-group-title {
+      margin: 1.4rem 0 0.7rem;
+      text-align: center;
+    }
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+    .benchmark-grid.cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .benchmark-video-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 0.55rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+    .benchmark-label {
+      margin-bottom: 0.5rem;
+      border: 1px solid #d1d5db;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 0.35rem 0.45rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.25;
+    }
+    .benchmark-video-card video {
+      width: 100%;
+      display: block;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #000;
+    }
+    #BibTeX pre {
+      white-space: pre-wrap;
+    }
+    @media (max-width: 900px) {
+      .benchmark-grid,
+      .benchmark-grid.cols-5 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .title.is-1 {
+        width: 100%;
+        margin-left: 0;
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              Remembering What Matters: Dependency-Guided Structured Memory for VLA Policies
+            </h1>
+            <div class="publication-authors" style="font-size: 18px; margin-top: 24px;">
+              <span class="author-block">
+                Peishuo Wang<sup>1,2,3 †</sup>,
+                Fengshuo Bai<sup>1,2,3 †</sup>,
+                Yufeng Li<sup>1,2,3 †</sup>,
+                Tawei Chou<sup>1,2,5</sup>,
+                Yinda Xu<sup>1</sup>,
+                <br>
+                Ying Wen<sup>1,2</sup>,
+                Yaodong Yang<sup>2,5</sup>,
+                Chen Gao<sup>4</sup>,
+                Zhenzhe Zheng<sup>1 *</sup>,
+                Fan Wu<sup>1</sup>
+              </span>
+              <br>
+              <span class="affiliation-block">
+                <sup>1</sup>Shanghai Jiao Tong University,
+                <sup>2</sup>PKU-PsiBot Joint Lab,
+                <sup>3</sup>Zhongguancun Academy,
+                <sup>4</sup>Tsinghua University,
+                <sup>5</sup>Peking University
+              </span>
+              <br>
+              <span class="note-block">
+                <em>† Equal contribution. * Corresponding author.</em>
+              </span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <span class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (releasing soon)</span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="overview">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Overview</h2>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <img src="./images/fig1.png" alt="Overview of TTS-Memory. Panel A shows that the current observation can hide which block is under which cover. Panel B shows dependency-DAG retrieval and adaptive keyframe selection. Panel C shows RMBench full-task success versus the number of subtasks." width="100%">
+          <p class="overview-caption has-text-justified">
+            <b>Overview of TTS-Memory for subtask-structured memory in long-horizon tasks.</b>
+            <b>(A)</b> The current observation may not reveal past information needed for the next action.
+            <b>(B)</b> The first tier retrieves memories from relevant subtasks through a dependency DAG. The second tier selects representative keyframes within each subtask through adaptive clustering.
+            <b>(C)</b> RMBench full-task success versus the number of subtasks.
+            The point at 3–5 averages five tasks.
+            The points at 6, 6.9, and 9 are Cover Blocks, Blocks Ranking Try, and Press Button, respectively.
+            Observe and Pickup is omitted because every compared method has low success there.
+          </p>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <p>
+              <b>Abstract.</b> Long-horizon robotic manipulation is often non-Markovian: irreversible state transitions can make earlier information unavailable in subsequent observations. The performance of vision-language-action (VLA) models can degrade in this non-Markovian setting, where selecting the correct action requires information from earlier states. Existing memory mechanisms extend context through recent-frame windows, compressed latent stores, or similarity-based keyframe retrieval. However, they do not explicitly identify relevant completed subtasks or select frames within them that capture pre-transition states no longer visible in subsequent observations. We introduce <b>TTS-Memory</b>, a two-tier memory framework for long-horizon VLA policies. The first tier segments execution into subtasks and uses a directed acyclic graph (DAG) of subtask dependencies to guide retrieval of relevant completed subtasks. The second tier adaptively selects keyframes that represent the different states within each retrieved subtask. The action model uses cross-attention fused keyframe representations and a separately preserved representation of the initial observation. We evaluate TTS-Memory on RMBench, the SafeLab chemistry-lab simulation benchmark, LIBERO, and real-robot tasks with a Franka arm. On RMBench, TTS-Memory achieves an overall success rate of 73.0%, compared with 41.2% for Mem-0, with the largest gain on tasks that require multiple past observations (23.3% to 71.8%). Ablations show that DAG filtering matters most on these tasks, and that adaptive keyframe selection performs comparably to three keyframes per subtask while storing about 30% fewer frames.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="videos">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Inference Videos</h2>
+        </div>
+      </div>
+
+      <h3 class="title is-4 video-group-title">RMBench M(1)</h3>
+      <div class="benchmark-grid cols-5">
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Swap Blocks</div>
+          <video controls preload="metadata" playsinline src="./videos/swap_blocks.mp4"></video>
+        </article>
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Rearrange Blocks</div>
+          <video controls preload="metadata" playsinline src="./videos/rearrange_blocks.mp4"></video>
+        </article>
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Put Back Block</div>
+          <video controls preload="metadata" playsinline src="./videos/put_back_block.mp4"></video>
+        </article>
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Swap T</div>
+          <video controls preload="metadata" playsinline src="./videos/swap_T.mp4"></video>
+        </article>
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Observe and Pickup</div>
+          <video controls preload="metadata" playsinline src="./videos/observe_and_pickup.mp4"></video>
+        </article>
+      </div>
+
+      <h3 class="title is-4 video-group-title">RMBench M(n)</h3>
+      <div class="benchmark-grid">
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Cover Blocks</div>
+          <video controls preload="metadata" playsinline src="./videos/cover_blocks.mp4"></video>
+        </article>
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Blocks Ranking Try</div>
+          <video controls preload="metadata" playsinline src="./videos/blocks_ranking_try.mp4"></video>
+        </article>
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Battery Try</div>
+          <video controls preload="metadata" playsinline src="./videos/battery_try.mp4"></video>
+        </article>
+        <article class="benchmark-video-card">
+          <div class="benchmark-label">Press Button</div>
+          <video controls preload="metadata" playsinline src="./videos/press_button.mp4"></video>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{wang2026ttsmemory,
+  title={Remembering What Matters: Dependency-Guided Structured Memory for VLA Policies},
+  author={Wang, Peishuo and Bai, Fengshuo and Li, Yufeng and Chou, Tawei and Xu, Yinda and Wen, Ying and Yang, Yaodong and Gao, Chen and Zheng, Zhenzhe and Wu, Fan},
+  year={2026}
+}</code></pre>
+    </div>
+  </section>
+
+</body>
+</html>
