@@ -85,13 +85,50 @@
       border-radius: 8px;
       background: #000;
     }
+    .task-block {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      padding: 1rem 1.1rem;
+      text-align: left;
+    }
+    .task-block + .task-block {
+      margin-top: 1rem;
+    }
+    .task-block h4 {
+      margin: 0 0 0.45rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .task-instruction {
+      margin: 0 0 0.8rem;
+      color: #4b5563;
+    }
+    .task-video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+    .task-video-grid.cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .task-video-grid video {
+      width: 100%;
+      display: block;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #000;
+    }
     #BibTeX pre {
       white-space: pre-wrap;
     }
     @media (max-width: 900px) {
       .benchmark-grid,
-      .benchmark-grid.cols-5 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .benchmark-grid.cols-5,
+      .task-video-grid,
+      .task-video-grid.cols-3 {
+        grid-template-columns: 1fr;
       }
       .title.is-1 {
         width: 100%;
@@ -241,6 +278,50 @@
           <video controls preload="metadata" playsinline src="./videos/press_button.mp4"></video>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="real-robot">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Real-Robot Videos</h2>
+        </div>
+      </div>
+
+      <article class="task-block">
+        <h4>Task 1</h4>
+        <p class="task-instruction">
+          <strong>Task instruction:</strong> Insert the pipette into the middle slot, then return it to its original slot.
+        </p>
+        <div class="task-video-grid">
+          <video controls preload="metadata" playsinline src="./videos/real/task1_1.mp4"></video>
+          <video controls preload="metadata" playsinline src="./videos/real/task1_2.mp4"></video>
+        </div>
+      </article>
+
+      <article class="task-block">
+        <h4>Task 2</h4>
+        <p class="task-instruction">
+          <strong>Task instruction:</strong> Place each conical flasks on the middle pad, returning it to its original position.
+        </p>
+        <div class="task-video-grid">
+          <video controls preload="metadata" playsinline src="./videos/real/task2_1.mp4"></video>
+          <video controls preload="metadata" playsinline src="./videos/real/task2_2.mp4"></video>
+        </div>
+      </article>
+
+      <article class="task-block">
+        <h4>Task 3</h4>
+        <p class="task-instruction">
+          <strong>Task instruction:</strong> Place the conical flask on the middle pad, then return it to its original pad.
+        </p>
+        <div class="task-video-grid cols-3">
+          <video controls preload="metadata" playsinline src="./videos/real/task3_1.mp4"></video>
+          <video controls preload="metadata" playsinline src="./videos/real/task3_2.mp4"></video>
+          <video controls preload="metadata" playsinline src="./videos/real/task3_3.mp4"></video>
+        </div>
+      </article>
     </div>
   </section>
 
